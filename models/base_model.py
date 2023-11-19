@@ -40,24 +40,6 @@ class BaseModel:
                 if key != "__class__":
                     setattr(self, key, value)
 
-<<<<<<< HEAD
-=======
-            if "id" not in kwargs:
-                self.id = str(uuid.uuid4())
-            if "created_at" not in kwargs:
-                self.created_at = datetime.now()
-            if "updated_at" not in kwargs:
-                self.updated_at = datetime.now()
-
-            del kwargs['__class__']
-            self.__dict__.update(kwargs)
-
-    def __str__(self):
-        """Returns a string representation of the instance"""
-        cls = (str(type(self)).split('.')[-1]).split('\'')[0]
-        return '[{}] ({}) {}'.format(cls, self.id, self.to_dict()) # instead of getting directly __dict__
-
->>>>>>> cea6af7da6aa46ab9a4afbb1068e08244103ae36
     def save(self):
         """Update updated_at with the current datetime."""
         self.updated_at = datetime.utcnow()
@@ -65,22 +47,7 @@ class BaseModel:
         models.storage.save()
 
     def to_dict(self):
-<<<<<<< HEAD
         """Return a dictionary representation of the BaseModel instance.
-=======
-        """Convert instance into dict format"""
-        dictionary = {}
-        dictionary.update(self.__dict__)
-        dictionary.update({'__class__':
-                          (str(type(self)).split('.')[-1]).split('\'')[0]})
-        dictionary['created_at'] = self.created_at.isoformat()
-        dictionary['updated_at'] = self.updated_at.isoformat()
-        if '_sa_instance_state' in dictionary.keys():
-            del dictionary['_sa_instance_state']
-        if '__class__' in dictionary.keys():
-            del dictionary['__class__']
-        return dictionary
->>>>>>> cea6af7da6aa46ab9a4afbb1068e08244103ae36
 
         Includes the key/value pair __class__ representing
         the class name of the object.

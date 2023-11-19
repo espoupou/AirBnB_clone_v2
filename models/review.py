@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-<<<<<<< HEAD
 """Defines the Review class."""
 from models.base_model import Base
 from models.base_model import BaseModel
@@ -20,15 +19,6 @@ class Review(BaseModel, Base):
         place_id (sqlalchemy String): The review's place id.
         user_id (sqlalchemy String): The review's user id.
     """
-=======
-""" Review module for the HBNB project """
-from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, ForeignKey
-
-
-class Review(BaseModel):
-    """ Review class to store review information """
->>>>>>> cea6af7da6aa46ab9a4afbb1068e08244103ae36
     __tablename__ = "reviews"
     text = Column(String(1024), nullable=False)
     place_id = Column(String(60), ForeignKey("places.id"), nullable=False)
