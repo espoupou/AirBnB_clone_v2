@@ -137,6 +137,7 @@ class HBNBCommand(cmd.Cmd):
         except KeyError:
             print("** no instance found **")
 
+<<<<<<< HEAD
     def do_all(self, line):
         """Usage: all or all <class> or <class>.all()
         Display string representations of all instances of a given class.
@@ -149,6 +150,50 @@ class HBNBCommand(cmd.Cmd):
             args = line.split(" ")
             if args[0] not in self.__classes:
                 raise NameError()
+=======
+    def help_destroy(self):
+        """ Help information for the destroy command """
+        print("Destroys an individual instance of a class")
+        print("[Usage]: destroy <className> <objectId>\n")
+
+    def do_all(self, args):
+        """ Shows all objects, or all objects of a class"""
+        print_list = []
+        objs = storage.all()
+        if not args:
+            for key in objs:
+                print_list.append(objs[key])
+            print(print_list)
+            return
+        try:
+            args = args.split(" ")
+            if args[0] not in list(self.classes.keys()):
+                raise NameError()
+            for key in objs:
+                name = key.split('.')
+                if name[0] == args[0]:
+                    print_list.append(str(objs[key]))
+            print(print_list)
+        except NameError as e:
+            print("** class doesn't exist **")
+        # if args:
+        #     args = args.split(' ')[0]  # remove possible trailing args
+        #     if args not in HBNBCommand.classes:
+        #         print("** class doesn't exist **")
+        #         return
+        #     for k, v in storage._FileStorage__objects.items():
+        #         if k.split('.')[0] == args:
+        #             print_list.append(str(v))
+        # else:
+        #     for k, v in storage._FileStorage__objects.items():
+        #         print_list.append(str(v))
+        # print(print_list)
+
+    def help_all(self):
+        """ Help information for the all command """
+        print("Shows all objects, or all of a class")
+        print("[Usage]: all <className>\n")
+>>>>>>> cea6af7da6aa46ab9a4afbb1068e08244103ae36
 
             o = storage.all(eval(args[0]))
             print([o[k].__str__() for k in o])
