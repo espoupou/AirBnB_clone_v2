@@ -212,7 +212,6 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
         print_list = []
-        
         objs = storage.all()
         if not args:
             for key in objs:
@@ -221,15 +220,14 @@ class HBNBCommand(cmd.Cmd):
             return
         try:
             args = args.split(" ")
-            if args[0] not in self.all_classes:
+            if args[0] not in list(self.classes.keys()):
                 raise NameError()
             for key in objs:
                 name = key.split('.')
                 if name[0] == args[0]:
-                    print_list.append(objects[key])
+                    print_list.append(str(objs[key]))
             print(print_list)
-            
-        except NameError:
+        except NameError as e:
             print("** class doesn't exist **")
         # if args:
         #     args = args.split(' ')[0]  # remove possible trailing args
