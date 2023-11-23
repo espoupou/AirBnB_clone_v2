@@ -40,7 +40,7 @@ class BaseModel:
             #                                          '%Y-%m-%dT%H:%M:%S.%f')
             # kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
             #                                          '%Y-%m-%dT%H:%M:%S.%f')
-            if "__class__" in kwargs:
+            if "__class__" in list(kwargs.keys()):
                 del kwargs['__class__']
             self.__dict__.update(kwargs)
 
