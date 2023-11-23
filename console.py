@@ -115,7 +115,6 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, line):
         """ Create an object of any class"""
-        
         try:
             if not line:
                 raise SyntaxError()
@@ -136,7 +135,7 @@ class HBNBCommand(cmd.Cmd):
             obj.save()
         except SyntaxError:
             print("** class name missing **")
-        except NameError:
+        except NameError as e:
             print("** class doesn't exist **")
 
         # if not args:
