@@ -3,6 +3,7 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
+from os import getenv
 
 
 class User(BaseModel, Base):
@@ -14,3 +15,10 @@ class User(BaseModel, Base):
     last_name = Column(String(128))
     places = relationship('Place', backref='user', cascade='delete')
     reviews = relationship('Review', backref='user', cascade='delete')
+
+    if getenv("HBNB_TYPE_STORAGE") == "db":
+        @property
+        def reviews(self):
+            """ Place reviews """
+            rv = models.storage.all(Review).values()
+            return {re for re in rv if re.place_id == self.id}
