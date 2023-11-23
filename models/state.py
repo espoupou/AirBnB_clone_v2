@@ -3,6 +3,7 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String
+from os import getenv
 
 
 class State(BaseModel, Base):
@@ -14,7 +15,7 @@ class State(BaseModel, Base):
     else:
         name = ""
 
-    if models.is_type != 'db':
+    if getenv("HBNB_TYPE_STORAGE") == "db":
         @property
         def cities(self):
             cities_list = []
