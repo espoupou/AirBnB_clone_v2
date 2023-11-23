@@ -19,7 +19,7 @@ place_amenity = Table("place_amenity", Base.metadata,
 class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = 'places'
-    
+
     if getenv("HBNB_TYPE_STORAGE") == "db":
         city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
         user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
@@ -44,11 +44,11 @@ class Place(BaseModel, Base):
         longitude = 0.0
         amenity_ids = []
 
-        if getenv("HBNB_TYPE_STORAGE") == "db":
-            @property
-            def reviews(self):
+    if getenv("HBNB_TYPE_STORAGE") == "db":
+         @property
+        def reviews(self):
                 """ Returns list of reviews.id """
-                var = models.storage.all()
+               var = models.storage.all()
                 lista = []
                 result = []
                 for key in var:
