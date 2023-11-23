@@ -45,7 +45,7 @@ class DBStorage:
                 key = "{}.{}".format(type(elem).__name__, elem.id)
                 dico[key] = elem
         else:
-            tables = [State, City, User, Place, Review] #, Amenity]
+            tables = [State, City, User, Place, Review, Amenity]
             for table in tables:
                 query = self.__session.query(table)
                 for elem in query:
