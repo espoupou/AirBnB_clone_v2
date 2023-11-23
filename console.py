@@ -119,6 +119,7 @@ class HBNBCommand(cmd.Cmd):
         try:
             if not line:
                 raise SyntaxError()
+            print("test")
             my_list = line.split(" ")
             obj = eval("{}()".format(my_list[0]))
             print("{}".format(obj.id))
