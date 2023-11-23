@@ -1,8 +1,19 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, ForeignKey, Integer, Float
+from sqlalchemy import Column, String, ForeignKey, Integer, Float, Table
 from os import getenv
+
+
+place_amenity = Table("place_amenity", Base.metadata,
+                      Column("place_id", String(60),
+                             ForeignKey("places.id"),
+                             primary_key=True,
+                             nullable=False),
+                      Column("amenity_id", String(60),
+                             ForeignKey("amenities.id"),
+                             primary_key=True,
+                             nullable=False))
 
 
 class Place(BaseModel, Base):
@@ -32,3 +43,31 @@ class Place(BaseModel, Base):
         latitude = 0.0
         longitude = 0.0
         amenity_ids = []
+
+        if getenv("HBNB_TYPE_STORAGE") == "db":
+            @property
+            def reviews(self):
+                """ Returns list of reviews.id """
+                var = models.storage.all()
+                lista = []
+                result = []
+                for key in var:
+                    review = key.replace('.', ' ')
+                    review = shlex.split(review)
+                    if (review[0] == 'Review'):
+                        lista.append(var[key])
+                for elem in lista:
+                    if (elem.place_id == self.id):
+                        result.append(elem)
+                return (result)
+        else:
+            @property
+            def amenities(self):
+                """ Returns list of amenity ids """
+                return self.amenity_ids
+    
+            @amenities.setter
+            def amenities(self, obj=None):
+                """ Appends amenity ids to the attribute """
+                if type(obj) is Amenity and obj.id not in self.amenity_ids:
+                    self.amenity_ids.append(obj.id)
