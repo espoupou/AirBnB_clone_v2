@@ -2,10 +2,7 @@
 # Fabfile to create and distribute an archive to a web server.
 import os.path
 from datetime import datetime
-from fabric.api import env
-from fabric.api import local
-from fabric.api import put
-from fabric.api import run
+from fabric.api import env, local, put, run
 
 env.hosts = ["100.26.173.10", "18.235.243.212"]
 
@@ -28,14 +25,7 @@ def do_pack():
 
 
 def do_deploy(archive_path):
-    """Distributes an archive to a web server.
-
-    Args:
-        archive_path (str): The path of the archive to distribute.
-    Returns:
-        If the file doesn't exist at archive_path or an error occurs - False.
-        Otherwise - True.
-    """
+    """Distributes an archive to a web server."""
     if os.path.isfile(archive_path) is False:
         return False
     file = archive_path.split("/")[-1]
@@ -65,7 +55,6 @@ def do_deploy(archive_path):
     if run("sudo ln -s /data/web_static/releases/{}/ /data/web_static/current".
            format(name)).failed is True:
         return False
-    print("New version deployed!")
     return True
 
 
