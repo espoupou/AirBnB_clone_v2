@@ -6,7 +6,6 @@ $nginx_conf = "server {
     listen [::]:80 default_server;
 
     add_header X-Served-By ${hostname};
-
     root   /var/www/html;
     index  index.html index.htm;
 
@@ -21,8 +20,8 @@ $nginx_conf = "server {
 
     error_page 404 /404.html;
     location /404 {
-      root /var/www/html;
-      internal;
+        root /var/www/html;
+        internal;
     }
 }"
 
