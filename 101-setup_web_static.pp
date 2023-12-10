@@ -80,13 +80,7 @@ file { '/var/www/html':
 
 file { '/var/www/html/index.html':
   ensure  => 'present',
-  content => "<html>
-  <head>
-  </head>
-  <body>
-    Holberton School
-  </body>
-</html>"
+  content => "Hello world!"
 } ->
 
 file { '/var/www/html/404.html':
