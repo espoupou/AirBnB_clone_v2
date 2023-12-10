@@ -8,7 +8,7 @@ $nginx_conf = "server {
     add_header X-Served-By ${hostname};
     root   /var/www/html;
     index  index.html index.htm;
-
+    server_name _;
     location /hbnb_static {
         alias /data/web_static/current;
         index index.html index.htm;
