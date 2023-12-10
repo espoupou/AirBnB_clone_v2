@@ -52,7 +52,13 @@ file { '/data/web_static/shared':
 
 file { '/data/web_static/releases/test/index.html':
   ensure  => 'present',
-  content => "Holberton School\n"
+  content => "<html>
+  <head>
+  </head>
+  <body>
+    Holberton School
+  </body>
+</html>"
 } ->
 
 file { '/data/web_static/current':
